@@ -18,4 +18,3 @@
 #define RESET "\x1B[0m"
 
 void cd(char *args[]);
-void make_path(const char *path);
