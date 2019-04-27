@@ -19,6 +19,8 @@ int main(void){
     char *args[MAX_LEN / 2 + 1]; /* command line arguments */
     int should_run = 1;          /* flag to determine when to exit program */
     int background = 0;          /* background flag */
+    int pipeline = 0;            /* pipeline flag */
+    int redirection = 0;         /* redirection flag */
     int hisnum;                  /* using history num */
     
     char *input;                 /* input data */
@@ -91,6 +93,17 @@ int main(void){
         }
 
         input[strlen(input) - 1] = '\0'; /* fgets also gets \n, we change it. */
+
+        char *cpy;
+
+        if(strchr(input,'|')){
+            pipeline = 1;
+            cpy = strdup(input);
+        }
+        if(strchr(input,'>') || strchr(input,'<')){
+            redirection = 1;
+            cpy = strdup(input);
+        }
 
         if(*input == '\0'){ /* empty case : goto end of while */
             goto fin;
@@ -303,6 +316,10 @@ int main(void){
             exit(0);
         }
 
+        else if(pipeline || redirection){ /* pipeline & redirection give up, just use system */
+            system(cpy);
+            free(cpy);
+        }
 
         else{ /* extra command, not core */
             pid_t pid = fork(); /* main shell is still alive; make child and execute command there */
