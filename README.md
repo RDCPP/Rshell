@@ -2,4 +2,5 @@
 
 System Programming Project
 
-> use makefile
+> use Makefile
+> make clean;make;./rshell
