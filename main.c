@@ -140,7 +140,10 @@ int main(void){
         /* pwd : current path gives */
 
         else if(!strcmp(args[0],"pwd")){
-            printf("%s\n",path);
+            char *p = (char *)malloc(sizeof(char)*255);
+            getcwd(p,255);
+            printf("%s\n",p);
+            free(p);
         }
 
         /* clear : make our shell interface clean */
@@ -152,13 +155,19 @@ int main(void){
         /* whoami : returns username */
 
         else if(!strcmp(args[0],"whoami")){
-            printf("%s\n",username);
+            char *u = (char *)malloc(sizeof(char)*50);
+            cuserid(u);
+            printf("%s\n",u);
+            free(u);
         }
 
         /* hostname : returns hostname */
 
         else if(!strcmp(args[0],"hostname")){
-            printf("%s\n",hostname);
+            char *h = (char *)malloc(sizeof(char)*50);
+            gethostname(h,49);
+            printf("%s\n",h);
+            free(h);
         }
 
         /* 이 부분은 환경변수와 alias 할당을 위한 구현단이었음. 구현의 난항으로 인해 일단 주석처리함 */
