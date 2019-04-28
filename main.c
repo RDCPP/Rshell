@@ -327,6 +327,7 @@ int main(void){
 
         else if(pipeline || redirection){ /* pipeline & redirection give up, just use system */
             system(cpy);
+			pipeline,redirection = 0;
             free(cpy);
         }
 
