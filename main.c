@@ -321,6 +321,7 @@ int main(void){
             char num[30];
             sprintf(num,"%d",hisnum);
             write(fd,num,strlen(num));
+            /* record hisnum for next time */
             close(fd);
             exit(0);
         }
